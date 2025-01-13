@@ -1,18 +1,22 @@
 import sys
-from sympy import symbols, sin
+import sympy
+from sympy import *
 
-#initialize x as a sympy symbol
 x = symbols('x')
 
-#apparently "normal" sine function
-f_0 = sin(x)
-f = f_0
+t = sin(x)
 
-n = int(input()) #number of interations
-if (n == 0): sys.exit()
+def iterate(f, x, f_0):
+    try:
+        return f.subs(x, f_0)
+    except:
+        print("Something went wrong in iterate(f, x, f_0)")
 
-for i in range(n - 1):
-    f = f.subs(x, f_0)
+def nest(f_0, x, n):
+    f = f_0
+    for i in range(n - 1):
+        f = iterate(f, x, f_0)
+    return f
 
-# fails from around n = 245 to n = 249 and above due to hitting maximum recursion limit
-print(f)
+nested = nest(t, x, 10)
+print(nested)
