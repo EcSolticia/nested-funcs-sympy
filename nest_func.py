@@ -1,4 +1,3 @@
-import sympy as sp
 
 def get_func_name(func_expr: str) -> list:
     func_name_end_pos: int = 0
